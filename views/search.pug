@@ -1,4 +1,14 @@
 extends layouts/main
+include mixin/videoBlock
 
 block content
-    p search!
+    .search__header
+        p Searching for: #{searchingBy}
+    .serach__videos
+        each item in videos
+            +videoBlock({
+                id: item.id,
+                file: item.videoFile,
+                title: item.title,
+                views: item.views
+            })
