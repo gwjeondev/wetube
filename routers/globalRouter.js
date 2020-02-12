@@ -5,12 +5,21 @@ import { login, logout, getJoin, postJoin, getLogin, postLogin } from "../contro
 
 const globalRouter = express.Router();
 
+// Home
 globalRouter.get(routes.home, home);
+
+// Join
 globalRouter.get(routes.join, getJoin);
 globalRouter.post(routes.join, postJoin);
+
+// Login
 globalRouter.get(routes.login, getLogin);
 globalRouter.post(routes.login, postLogin);
+
+// Logout
 globalRouter.get(routes.logout, logout);
+
+// Search
 globalRouter.get(routes.search, search);
 
 export default globalRouter;

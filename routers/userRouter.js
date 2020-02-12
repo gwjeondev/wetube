@@ -4,9 +4,13 @@ import { users, userDetail, editProfile, changePassword } from "../controllers/u
 
 const userRouter = express.Router();
 
-// userRouter.get(routes.users, users);
+// Edit Profile
 userRouter.get(routes.editProfile, editProfile);
+
+// Change Password
 userRouter.get(routes.changePassword, changePassword);
+
+// User Detail
 userRouter.get(routes.userDetail(), userDetail);
 
 export default userRouter;
