@@ -2,9 +2,62 @@ extends layouts/main
 include mixin/videoBlock
 
 block content
-    .videos
-        h1 Video
+    .home-videos
         each item in videos
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
+            +videoBlock({
+                id: item.id,
+                file: item.fileUrl,
+                title: item.title,
+                views: item.views
+            })
             +videoBlock({
                 id: item.id,
                 file: item.fileUrl,

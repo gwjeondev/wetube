@@ -3,6 +3,7 @@ module.exports = {
     'airbnb-base', "plugin:prettier/recommended"
   ],
   rules: {
-    "no-console": "off"
+    "no-console": "off",
+    "prefer-destructuring": "off"
   }
 };

@@ -15,6 +15,7 @@ app.set("view engine", "pug");
 
 // 정적인 라우터를 결정해줌. /uploads에 접근하면 local 폴더인 uploads로 들어감.
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
