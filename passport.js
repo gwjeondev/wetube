@@ -1,13 +1,22 @@
 import dotenv from "dotenv";
 import passport from "passport";
 import GithubStrategy from "passport-github";
+import KakaoStrategy from "passport-kakao";
+import NaverStrategy from "passport-naver";
 import User from "./models/User";
-import { githubLoginCallback } from "./controllers/userController";
+import {
+  githubLoginCallback,
+  kakaoLoginCallback,
+  naverLoginCallback
+} from "./controllers/userController";
 import routes from "./routes";
 
 dotenv.config();
 
+// Local
 passport.use(User.createStrategy());
+
+// Github
 passport.use(
   new GithubStrategy(
     {
@@ -16,6 +25,29 @@ passport.use(
       callbackURL: `http://localhost:4000${routes.githubCallback}`
     },
     githubLoginCallback
+  )
+);
+
+// Kakao
+passport.use(
+  new KakaoStrategy(
+    {
+      clientID: process.env.KAKAO_ID,
+      callbackURL: `http://localhost:4000${routes.kakaoCallback}`
+    },
+    kakaoLoginCallback
+  )
+);
+
+// Facebook
+passport.use(
+  new NaverStrategy(
+    {
+      clientID: process.env.NAVER_ID,
+      clientSecret: process.env.NAVER_CLIENT_SECRET,
+      callbackURL: `http://localhost:4000${routes.naverCallback}`
+    },
+    naverLoginCallback
   )
 );
 

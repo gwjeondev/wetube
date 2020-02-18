@@ -7,6 +7,7 @@ const SEARCH = "/search";
 
 // Users
 const USERS = "/users";
+const ME = "/me";
 const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
@@ -21,6 +22,10 @@ const DELETE_VIDEO = "/:id/delete";
 // Social Login
 const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
+const KAKAO = "/auth/kakao";
+const KAKAO_CALLBACK = "/oauth";
+const NAVER = "/auth/naver";
+const NAVER_CALLBACK = "/auth/naver/callback";
 
 const routes = {
   home: HOME,
@@ -29,6 +34,7 @@ const routes = {
   logout: LOGOUT,
   search: SEARCH,
   users: USERS,
+  me: ME,
   userDetail: id => (id ? `${USERS}/${id}` : USER_DETAIL),
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
@@ -38,7 +44,11 @@ const routes = {
   editVideo: id => (id ? `/videos/${id}/edit` : EDIT_VIDEO),
   deleteVideo: id => (id ? `/videos/${id}/delete` : DELETE_VIDEO),
   gitHub: GITHUB,
-  githubCallback: GITHUB_CALLBACK
+  githubCallback: GITHUB_CALLBACK,
+  kakao: KAKAO,
+  kakaoCallback: KAKAO_CALLBACK,
+  naver: NAVER,
+  naverCallback: NAVER_CALLBACK
 };
 
 export default routes;

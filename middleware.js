@@ -9,7 +9,8 @@ export const localsMiddleware = (req, res, next) => {
   // 변수를 global하게 template에서 사용가능
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
-  res.locals.user = req.user || null;
+  res.locals.loggedUser = req.user || null;
+  console.log(req.user);
   next();
 };
 

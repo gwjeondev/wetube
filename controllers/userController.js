@@ -42,10 +42,9 @@ export const githubLoginCallback = async (
   cb
 ) => {
   const { id, avatar_url, name, email } = profile._json;
+  console.log(profile._json);
   try {
-    console.log(profile._json);
     const user = await User.findOne({ email });
-    console.log(email);
     if (user) {
       user.githubId = id;
       user.save();
@@ -66,6 +65,69 @@ export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
+export const kakaoLogin = passport.authenticate("kakao");
+export const kakaoLoginCallback = async (
+  accessToken,
+  refreshToken,
+  profile,
+  done
+) => {
+  const { id } = profile._json;
+  const { nickname, profile_image } = profile._json.properties;
+  const { email } = profile._json.kakao_account;
+
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.kakaoId = id;
+      user.save();
+      return done(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name: nickname,
+      avatarUrl: profile_image,
+      kakaoId: id
+    });
+    return done(null, newUser);
+  } catch (error) {
+    return done(error);
+  }
+};
+export const postKakaoLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
+export const naverLogin = passport.authenticate("naver");
+export const naverLoginCallback = async (
+  accessToken,
+  refreshToken,
+  profile,
+  done
+) => {
+  const { id, email, profile_image, nickname } = profile._json;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.naverId = id;
+      user.save();
+      return done(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name: nickname,
+      avatarUrl: profile_image,
+      naverId: id
+    });
+    return done(null, newUser);
+  } catch (error) {
+    done(error);
+  }
+};
+export const postNaverLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 // Logout
 export const logout = (req, res) => {
   req.logout(); // passport 사용시
@@ -73,8 +135,18 @@ export const logout = (req, res) => {
 };
 
 // User Detail
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User-Detail" });
+export const getMe = (req, res) => {
+  res.render("userDetail", { pageTitle: "User-Detail", user: req.user });
+};
+export const userDetail = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User-Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
 
 // Edit Profile
 export const editProfile = (req, res) =>
