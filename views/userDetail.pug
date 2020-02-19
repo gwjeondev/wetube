@@ -1,7 +1,27 @@
 extends layouts/main
+include mixin/videoBlock
 
 block content
     .user-profile
         .user-profile__header
-            img.avatar(src=user.avatarUrl, alt="avatar")
-        h4.user-profile__username=user.name
+            img.u-avatar(src=user.avatarUrl, alt="avatar")
+            h4.user-profile__username=user.name
+            if loggedUser && loggedUser.id === user.id
+                .user-profile__btns
+                    a(href=`/users${routes.editProfile}`)
+                        button 프로필 수정
+                    if !loggedUser.kakaoId && !loggedUser.naverId && !loggedUser.githubId
+                        a(href=`/users${routes.changePassword}`)
+                            button 비밀번호 변경
+        .user-profile__videos
+            h4=`${user.name}님의 영상`
+            .home-videos
+                each item in user.videos
+                    +videoBlock({
+                        id: item.id,
+                        file: item.fileUrl,
+                        title: item.title,
+                        views: item.views
+                    })
+
+                

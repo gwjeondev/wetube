@@ -32,6 +32,11 @@
         font-size: 16px;
     }
   }
+  .video__author {
+    & a:hover{
+      color:#ff6b6b;
+    }
+  }
   .video__comments {
       margin-top :25px;
       .video__comment-number {

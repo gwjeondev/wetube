@@ -4,8 +4,8 @@ block content
     .form-container
         form(action=`${routes.videos}${routes.upload}`, method="post" enctype="multipart/form-data")
             .fileUpload
-                label(for="video-file") Video File
+                label(for="video-file") 비디오 파일
                 input(type="file", id="video-file", name="video-file", required=true, accept="video/*")
-            input(type="text", placeholder="Title", name="Title", required=true)
-            textarea(placeholder="Description", name="description", required=true)
+            input(type="text", placeholder="제목", name="Title", required=true)
+            textarea(placeholder="내용", name="description", required=true)
             input(type="submit" value="Upload Video")

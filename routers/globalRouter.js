@@ -25,11 +25,11 @@ globalRouter.get(routes.home, home);
 
 // Join
 globalRouter.get(routes.join, loginPrivate, getJoin);
-globalRouter.post(routes.join, postJoin, postLogin);
+globalRouter.post(routes.join, loginPrivate, postJoin, postLogin);
 
 // Login
 globalRouter.get(routes.login, loginPrivate, getLogin);
-globalRouter.post(routes.login, postLogin);
+globalRouter.post(routes.login, loginPrivate, postLogin);
 
 // Search
 globalRouter.get(routes.search, search);

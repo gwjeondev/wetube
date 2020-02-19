@@ -13,7 +13,8 @@
     &:not(:last-child) {
       margin-bottom: 15px;
     }
-    i {
+    i,
+    .font-naver {
       margin-right: 10px;
     }
   }
@@ -44,11 +45,13 @@
     }
   }
   .font-naver {
-    color: #fff;
+    font-size: 12px;
+    background: #fff;
+    color: #00c73c;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
   }
 }
