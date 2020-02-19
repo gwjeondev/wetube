@@ -1,9 +1,11 @@
 extends layouts/main
+include mixin/videoPlayer
 
 block content
     .video-detail__container
-        .video__player
-            video(src=`/${videos.fileUrl}`, controls=true)
+        +videoPlayer({
+            src:videos.fileUrl
+        })
         .video__info
             if loggedUser && videos.creator.id === loggedUser.id
                 a(href=routes.editVideo(videos.id)) 
@@ -15,7 +17,7 @@ block content
             else
                 span.video__views #{videos.views} views
         .video__author
-            | 제작자 
+            | 업로드 
             a(href=routes.userDetail(videos.creator.id))=videos.creator.email
         .video__comments
             if videos.comments.length === 1

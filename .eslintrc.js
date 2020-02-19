@@ -5,5 +5,8 @@ module.exports = {
     "prefer-destructuring": "off",
     "no-underscore-dangle": "off",
     camelcase: "off"
+  },
+  env: {
+    browser: true
   }
 };
