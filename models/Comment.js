@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// 스키마정의
 const CommentSchema = new mongoose.Schema({
   text: {
     type: String,
@@ -16,7 +15,6 @@ const CommentSchema = new mongoose.Schema({
   }
 });
 
-// 테이블 정의
 const model = mongoose.model("Comment", CommentSchema);
 
 export default model;

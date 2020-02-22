@@ -167,7 +167,6 @@ export const postEditProfile = async (req, res) => {
 
 // Change Password
 export const getChangePassword = (req, res) => {
-  console.log(req.user);
   res.render("changePassword", { pageTitle: "Change-Password" });
 };
 

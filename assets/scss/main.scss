@@ -14,14 +14,13 @@ body {
 main {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 15vh auto;
   min-height: 70vh;
 }
 
 button,
 input:not([type="file"]),
-textarea,
-.fileUpLoad {
+textarea {
   padding: 7px 10px;
   width: 100%;
   border: none;
@@ -52,3 +51,4 @@ button {
 button.delete {
     background: $dark-red;
 }
+

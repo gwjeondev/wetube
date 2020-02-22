@@ -1,5 +1,7 @@
 import routes from "../routes";
+import Comment from "../models/Comment";
 import Video from "../models/Video";
+import User from "../models/User";
 
 // Home
 export const home = async (req, res) => {
@@ -47,7 +49,9 @@ export const postUpload = async (req, res) => {
 export const videoDetail = async (req, res) => {
   const { id } = req.params;
   try {
-    const videos = await Video.findById(id).populate("creator");
+    const videos = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
     res.render("videoDetail", { pageTitle: videos.title, videos });
   } catch (error) {
     res.render(routes.home);
@@ -103,5 +107,62 @@ export const deleteVideo = async (req, res) => {
     }
   } catch (error) {
     res.redirect(routes.home);
+  }
+};
+
+// register Video View
+export const postRegisterView = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const video = await Video.findById(id);
+    video.views += 1;
+    video.save();
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+// add comment
+export const postAddComment = async (req, res) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+  try {
+    const newComment = await Comment.create({
+      text: comment,
+      creator: req.user.id
+    });
+    const video = await Video.findById(id);
+    const user = await User.findById(req.user.id);
+    video.comments.push(newComment.id);
+    user.comments.push(newComment.id);
+    video.save();
+    user.save();
+    res.send(JSON.stringify(newComment));
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postDelComment = async (req, res) => {
+  const { commentId, videoId } = req.body;
+  try {
+    await Comment.findByIdAndRemove({ _id: commentId });
+    const video = await Video.findById(videoId);
+    video.comments = video.comments.filter(comment => {
+      return comment.toString() !== commentId;
+    });
+    req.user.comments = req.user.comments.filter(comment => {
+      return comment.toString() !== commentId;
+    });
+    video.save();
+    req.user.save();
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
   }
 };

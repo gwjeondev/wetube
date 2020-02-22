@@ -8,6 +8,12 @@ const totalTime = document.getElementById("totalTime");
 const videoPlayHover = document.querySelector(".videoplayer__playhover");
 const videoVolume = document.getElementById("videoVolume");
 
+const registerView = () => {
+  const videoId = window.location.href.split("/videos/")[1];
+  fetch(`/api/${videoId}/view`, {
+    method: "POST"
+  });
+};
 const handlePlayClick = () => {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -59,9 +65,9 @@ const fullScreen = () => {
     videoContainer.RequestFullscreen();
   } else if (videoContainer.webkitRequestFullscreen) {
     videoContainer.webkitRequestFullscreen();
-  } else if (videoContainer.mozExitFullscreen) {
+  } else if (videoContainer.mozRequestFullscreen) {
     videoContainer.mozRequestFullscreen();
-  } else if (videoContainer.msExitFullscreen) {
+  } else if (videoContainer.msRequestFullscreen) {
     videoContainer.msRequestFullscreen();
   }
   videoScreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
@@ -125,5 +131,6 @@ const init = () => {
 };
 
 if (videoContainer) {
+  registerView();
   init();
 }

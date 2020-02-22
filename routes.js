@@ -27,6 +27,11 @@ const KAKAO_CALLBACK = "/oauth";
 const NAVER = "/auth/naver";
 const NAVER_CALLBACK = "/auth/naver/callback";
 
+// Ajax
+const API = "/api";
+const REGISTER_VIEW = "/:id/view";
+const ADD_COMMENT = "/:id/comment";
+const DEL_COMMENT = "/:id/comment-delete";
 const routes = {
   home: HOME,
   join: JOIN,
@@ -48,7 +53,11 @@ const routes = {
   kakao: KAKAO,
   kakaoCallback: KAKAO_CALLBACK,
   naver: NAVER,
-  naverCallback: NAVER_CALLBACK
+  naverCallback: NAVER_CALLBACK,
+  api: API,
+  registerView: REGISTER_VIEW,
+  addComment: ADD_COMMENT,
+  delComment: DEL_COMMENT
 };
 
 export default routes;

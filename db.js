@@ -6,7 +6,8 @@ dotenv.config(); // .env에 있는 변수들을 모두 불러옴. process.env.ke
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useFindAndModify: false,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 const db = mongoose.connection; // mongoDB connention 저장
