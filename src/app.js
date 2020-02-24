@@ -50,6 +50,4 @@ app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
 app.use(routes.api, apiRouter);
 
-console.log(app.get('env'));
-
 export default app;
