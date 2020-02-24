@@ -26,6 +26,7 @@
     "express-session": "^1.17.0",
     "get-blob-duration": "^1.1.0",
     "helmet": "^3.21.2",
+    "heroku-config": "^1.5.4",
     "mongoose": "^5.8.11",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
@@ -51,6 +52,8 @@
     "dev:assets": "cd src && webpack --mode development -w",
     "build:assets": "cd src && webpack --mode production",
     "build:server": "babel src --out-dir build --ignore 'src/assets' --ignore 'src/static' --ignore 'src/webpack.config.js'",
+    "copyAll": "xcopy .\\src\\static .\\build\\static /s /y && xcopy .\\src\\views .\\build\\views /s /y",
+    "prebuild": "rd /s /q build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
     "start": "cross-env NODE_ENV=production node build/init.js",
     "prestart": "npm run build"
