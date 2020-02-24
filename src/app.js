@@ -1,5 +1,7 @@
+import "@babel/polyfill";
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
@@ -21,12 +23,12 @@ const app = express();
 const CookieStore = MongoStore(session);
 
 dotenv.config();
+
 app.use(helmet()); // 보안
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
-// 정적인 라우터를 결정해줌. /uploads에 접근하면 local 폴더인 uploads로 들어감.
-app.use("/uploads", express.static("uploads"));
-app.use("/static", express.static("static"));
+app.use("/static", express.static(path.join(__dirname, "static")));
 
 app.use(cookieParser());
 app.use(bodyParser.json());

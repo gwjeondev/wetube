@@ -1,6 +1,6 @@
 .videoplayer {
   position: relative;
-  max-width: 1000px;
+  width: 900px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,6 @@
     }
   }
   video {
-    max-width: 100%;
     width: 100%;
   }
   .videoplayer__playhover {
@@ -41,7 +40,7 @@
   }
 
   .videoplayer__controls {
-    opacity: 1;
+    opacity: 0;
     transition: opacity 0.5s;
     width: 100%;
     position: absolute;

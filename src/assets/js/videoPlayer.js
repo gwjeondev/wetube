@@ -1,3 +1,5 @@
+import getBlobDuration from "get-blob-duration";
+
 const videoContainer = document.getElementById("jsvideoPlayer");
 const videoPlayer = document.getElementById("videoBody");
 const videoPlayBtn = document.getElementById("videoPlayButton");
@@ -97,8 +99,12 @@ const getCurrentTime = () => {
   const currentTimeString = formatDate(Math.floor(videoPlayer.currentTime));
   currentTime.innerText = currentTimeString;
 };
-const getTotalTime = () => {
-  const totalTimeString = formatDate(videoPlayer.duration);
+const getTotalTime = async () => {
+  const blob = await fetch(videoPlayer.src).then(response => response.blob());
+  console.log(blob);
+  console.dir(videoPlayer);
+  const duration = await getBlobDuration(blob);
+  const totalTimeString = formatDate(duration);
   totalTime.innerText = totalTimeString;
   setInterval(getCurrentTime, 1000);
 };
@@ -125,7 +131,7 @@ const init = () => {
   videoPlayBtn.addEventListener("click", handlePlayClick);
   videoVolBtn.addEventListener("click", handleVolClick);
   videoScreenBtn.addEventListener("click", fullScreen);
-  videoPlayer.addEventListener("loadedmetadata", getTotalTime);
+  videoPlayer.addEventListener("volumechange", getTotalTime);
   videoPlayer.addEventListener("ended", handleEnded);
   videoVolume.addEventListener("input", handleVolume);
 };

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 dotenv.config(); // .env에 있는 변수들을 모두 불러옴. process.env.key 와 같은 형식으로 사용가능
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL_PROD, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,

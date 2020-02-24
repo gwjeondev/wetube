@@ -3,6 +3,9 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(180px, 1fr));
     grid-gap: 25px;
+    video {
+        width: 100%;
+    }
     .video-block:first-child,
     .video-block:nth-child(2) {
         grid-column: span 2;

@@ -33,9 +33,9 @@ export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 export const postUpload = async (req, res) => {
   const { Title, description } = req.body;
-  const { path } = req.file;
+  const { location } = req.file;
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title: Title,
     description,
     creator: req.user.id
@@ -147,6 +147,7 @@ export const postAddComment = async (req, res) => {
   }
 };
 
+// del comment
 export const postDelComment = async (req, res) => {
   const { commentId, videoId } = req.body;
   try {

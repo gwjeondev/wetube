@@ -1,6 +1,6 @@
 mixin videoPlayer(video={})
     .videoplayer#jsvideoPlayer
-        video(src=`/${video.src}`)#videoBody
+        video(src=video.src)#videoBody
         .videoplayer__playhover
             i.fas.fa-play
         .videoplayer__controls
