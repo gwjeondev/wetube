@@ -48,11 +48,13 @@
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore 'scss'",
-    "dev:assets": "cd src && webpack --mode development -w",
-    "build:assets": "cd src && webpack --mode production",
-    "build:server": "babel src --out-dir build --ignore 'src/assets' --ignore 'src/static' --ignore 'src/webpack.config.js'",
-    "build": "npm run build:server && npm run build:assets",
+    "dev:server": "nodemon --delay 2 --exec babel-node src/init.js --ignore `scss`",
+    "dev:assets": "cd src && webpack --mode=development -w",
+    "build:assets": "cd src && webpack --mode=production",
+    "build:server": "babel src --out-dir build --ignore 'src/static','src/assets','src/webpack.config.js'",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rm -rf build",
     "start": "cross-env NODE_ENV=production node build/init.js",
     "prestart": "npm run build"
   },
