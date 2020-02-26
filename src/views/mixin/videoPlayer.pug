@@ -5,17 +5,16 @@ mixin videoPlayer(video={})
             i.fas.fa-play
         .videoplayer__controls
             .videoplayer__column
+                span#currentTime 00:00:00
+            .videoplayer__column
+                input#videoCurrentTime(type="range" min="0" step="1")
+            .videoplayer__column
+                span#totalTime 00:00:00
+            .videoplayer__column
                 .videoplayer__volume
                     span#videoVolButton
                         i.fas.fa-volume-up
-                    input#videoVolume(type="range", min="0", max="1", step="0.1" value="0.5")
-                .videotime
-                    span#currentTime 00:00:00
-                    |/
-                    span#totalTime 00:00:00
-            .videoplayer__column
-                span#videoPlayButton
-                    i.fas.fa-play
-            .videoplayer__column
-                span#videoScreenBtn
-                    i.fas.fa-expand
+                    input#videoVolume(type="range" min="0" max="1" step="0.1" value="0.5")
+                .videoplayer__fullscreen
+                    span#videoScreenBtn
+                        i.fas.fa-expand

@@ -1,13 +1,40 @@
 .videoplayer {
   position: relative;
-  width: 900px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    padding: 0 5px;
+    width: 60px;
+    height: 1px;
+    margin-right: 10px;
+    display: none;
+  }
+  input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #fff;
+    cursor: pointer;
+    height: 12px; width: 12px;   
+    border: 1px solid #fff;
+    border-radius: 12px;
+  }
+  input::-moz-range-thumb {
+    border: 1px solid #fff;
+    height: 10px; width: 10px;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+  }    
   &.full {
-    .videoplayer__controls {
-      opacity: 0; 
-    }
+    // .videoplayer__controls {
+    //   opacity: 1; 
+    // }
   }
   &:hover {
     .videoplayer__controls {
@@ -29,11 +56,11 @@
     height: 80px;
     padding: 10px;
     border-radius: 80px;
-    font-size: 25px;
-    background: rgba(0, 0, 0, 0.5);
+    font-size: 70px;
     color: rgba(255, 255, 255, 0.9);
     opacity: 0;
     transition: 0.5s;
+    text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     &.show {
       opacity: 1;
     }
@@ -44,79 +71,66 @@
     transition: opacity 0.5s;
     width: 100%;
     position: absolute;
-    padding: 8px 20px;
+    padding: 7px;
     bottom: 0;
     display: grid;
     z-index: 3;
-    grid-template-columns: repeat(3, 1fr);
-    font-size: 22px;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 70px 1fr 70px;
+    font-size: 14px;
     color: #fff;
     background: rgba(0, 0, 0, 0.3);
     i {
       cursor: pointer;
       &:hover {
-        color: rgba(0, 0, 0, 0.5);
+        color: #0984E3;
       }
     }
     .videoplayer__column:first-child {
+      align-self: center;
+    }
+    .videoplayer__column:nth-child(2) {
+      margin: 10px 0;
+      justify-self: center;
+      width: 100%;
+      & input {
+        max-width: none;
+        width: 100%;
+        display: block;
+      }
+    }
+    .videoplayer__column:nth-child(3) {
+      justify-self: end;
+      align-self: center;
+    }
+    .videoplayer__column:nth-child(4) {
       justify-self: start;
       display: flex;
       justify-content: center;
       align-items: center;
       .videoplayer__volume {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        width: 100px;
+        &:hover input {
+          display: block;
+        }
         span#videoVolButton {
           display: flex;
           justify-content: center;
           align-items: center;
           margin-right: 10px;
         }
-        input {
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          -ms-appearance: none;
-          background: rgba(255, 255, 255, 0.5);
-          margin: 0;
-          padding: 0 5px;
-          width: 70px;
-          height: 2px;
-          margin-right: 10px;
-        }
-
-        input::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          background: #576574;
-          cursor: pointer;
-          height: 12px; width: 12px;   
-          border: 1px solid #fff;
-          border-radius: 12px;
-        }
-
-        input::-moz-range-thumb {
-          border: 1px solid #fff;
-          height: 10px; width: 10px;
-          border-radius: 10px;
-          background: #576574;
-          cursor: pointer;
-        }    
       }
-      .videotime {
-        font-size: 14px;
-      }
-    }
-    .videoplayer__column:nth-child(2) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-self: center;
     }
     .videoplayer__column:last-child {
+      grid-column: span 3;
+      align-self: end;
+      width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      justify-self: end;
     }
   }
 }

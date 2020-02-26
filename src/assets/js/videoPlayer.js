@@ -2,13 +2,13 @@ import getBlobDuration from "get-blob-duration";
 
 const videoContainer = document.getElementById("jsvideoPlayer");
 const videoPlayer = document.getElementById("videoBody");
-const videoPlayBtn = document.getElementById("videoPlayButton");
 const videoVolBtn = document.getElementById("videoVolButton");
 const videoScreenBtn = document.getElementById("videoScreenBtn");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const videoPlayHover = document.querySelector(".videoplayer__playhover");
 const videoVolume = document.getElementById("videoVolume");
+const videoCurrentTime = document.getElementById("videoCurrentTime");
 
 const registerView = () => {
   const videoId = window.location.href.split("/videos/")[1];
@@ -23,7 +23,6 @@ const handlePlayClick = () => {
     setTimeout(() => {
       videoPlayHover.classList.remove("show");
     }, 500);
-    videoPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
     videoPlayHover.innerHTML = '<i class="fas fa-pause"></i>';
   } else {
     videoPlayer.pause();
@@ -31,7 +30,6 @@ const handlePlayClick = () => {
     setTimeout(() => {
       videoPlayHover.classList.remove("show");
     }, 500);
-    videoPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
     videoPlayHover.innerHTML = '<i class="fas fa-play"></i>';
   }
 };
@@ -96,13 +94,13 @@ const formatDate = seconds => {
 };
 
 const getCurrentTime = () => {
+  videoCurrentTime.value = videoPlayer.currentTime; // 재생 Bar 현재시간 Get
   const currentTimeString = formatDate(Math.floor(videoPlayer.currentTime));
   currentTime.innerText = currentTimeString;
 };
 const getTotalTime = async () => {
+  videoCurrentTime.max = videoPlayer.duration; // 재생 Bar 전체시간 Get
   const blob = await fetch(videoPlayer.src).then(response => response.blob());
-  console.log(blob);
-  console.dir(videoPlayer);
   const duration = await getBlobDuration(blob);
   const totalTimeString = formatDate(duration);
   totalTime.innerText = totalTimeString;
@@ -110,12 +108,11 @@ const getTotalTime = async () => {
 };
 const handleEnded = () => {
   videoPlayer.currentTime = 0;
-  videoPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+  videoPlayHover.innerHTML = '<i class="fas fa-play"></i>';
 };
 const handleVolume = () => {
   const volume = parseFloat(videoVolume.value, 10);
   videoPlayer.volume = volume;
-  console.log(volume);
   if (volume > 0.7) {
     videoVolBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
   } else if (volume > 0.1) {
@@ -124,19 +121,22 @@ const handleVolume = () => {
     videoVolBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
 };
+const handleVideoTime = () => {
+  videoPlayer.currentTime = videoCurrentTime.value;
+};
 
 const init = () => {
   videoPlayer.volume = 0.5;
   videoPlayer.addEventListener("click", handlePlayClick);
-  videoPlayBtn.addEventListener("click", handlePlayClick);
   videoVolBtn.addEventListener("click", handleVolClick);
   videoScreenBtn.addEventListener("click", fullScreen);
-  videoPlayer.addEventListener("volumechange", getTotalTime);
+  videoPlayer.addEventListener("loadedmetadata", getTotalTime);
   videoPlayer.addEventListener("ended", handleEnded);
   videoVolume.addEventListener("input", handleVolume);
+  videoCurrentTime.addEventListener("input", handleVideoTime);
 };
 
 if (videoContainer) {
-  registerView();
   init();
+  registerView();
 }

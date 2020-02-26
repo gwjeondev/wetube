@@ -1,4 +1,5 @@
 .video-detail__container {
+  padding: 0 10px;
   .video__player {
     video {
       max-width: 1000px;
@@ -10,7 +11,7 @@
   .video__info {
     position: relative;
     width: 100%;
-    max-width: 1000px;
+    // max-width: 1000px;
     margin-top: 25px;
     background: #fff;
     padding: 20px;
@@ -51,7 +52,7 @@
   }
   .video__comments {
     width: 100%;
-    max-width: 1000px;
+    // max-width: 1000px;
     margin-top: 25px;
     display: flex;
     flex-direction: column;

@@ -1,0 +1,12 @@
+@media (max-width:1024px) {
+    .user-profile {
+        .user-profile__videos {
+            .home-videos {
+                display: block;
+                .video-block {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
