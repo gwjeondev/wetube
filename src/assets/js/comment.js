@@ -23,7 +23,7 @@ const delComment = li => {
 const delSendComment = async e => {
   const videoId = window.location.href.split("/videos/")[1];
   const commentId = e.target.id;
-  const li = e.target.parentNode;
+  const li = e.target.parentNode.parentNode;
   const response = await axios({
     url: `/api/${videoId}/comment-delete`,
     method: "POST",
@@ -47,19 +47,30 @@ const addCommentNumber = () => {
 // front-end Add Comment
 const addComment = (comment, response) => {
   const li = document.createElement("li");
-  const spantext = document.createElement("span");
-  const spandel = document.createElement("span");
-  const spandate = document.createElement("span");
-  spantext.innerText = comment;
-  spandel.innerText = "❎";
-  spandel.className = "del-comment";
-  spandel.id = response.data._id;
-  spandel.addEventListener("click", delSendComment);
-  spandate.innerText = new Date().toString().slice(0, 21);
-  li.appendChild(spantext);
-  li.appendChild(spandel);
-  li.appendChild(spandate);
+  const infodiv = document.createElement("div");
+  const titlediv = document.createElement("div");
+  const name = document.createElement("span");
+  const date = document.createElement("span");
+  const del = document.createElement("span");
+  const text = document.createElement("span");
+  infodiv.className = "video__comment-info";
+  titlediv.className = "video__comment-title";
+  name.innerText = response.data.creator.name;
+  name.className = "author";
+  date.innerText = new Date().toString().slice(0, 21);
+  date.className = "time";
+  text.innerText = comment;
+  del.innerText = "❎";
+  del.className = "del-comment";
+  del.id = response.data._id;
+  titlediv.appendChild(name);
+  titlediv.appendChild(date);
+  infodiv.appendChild(titlediv);
+  infodiv.appendChild(del);
+  li.appendChild(infodiv);
+  li.appendChild(text);
   commentList.prepend(li);
+  del.addEventListener("click", delSendComment);
   addCommentNumber();
 };
 

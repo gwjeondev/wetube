@@ -20,14 +20,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-      button {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        width: 100px;
-        margin-bottom: 25px;
-      }
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    button {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 100px;
+      margin-bottom: 25px;
+    }
     .video__title,
     .video__views,
     .video__description {
@@ -61,11 +61,11 @@
     .video__comment-number {
       font-size: 18px;
       font-weight: bold;
-      background: #54A0FF;
+      background: #54a0ff;
       padding: 10px;
       color: #fff;
       border-radius: 15px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
     form {
       display: flex;
@@ -74,7 +74,7 @@
       width: 100%;
       margin: 20px 0;
       input#commentInput {
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         max-width: none;
         border-radius: 15px;
         width: 100% !important;
@@ -84,9 +84,9 @@
         background: #54a0ff;
         width: 70px;
         border-radius: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         &:hover {
-          background-color :#2e86de;
+          background-color: #2e86de;
         }
       }
     }
@@ -96,31 +96,33 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
         width: 100%;
-        max-width: 1000px;
         margin: 5px 0;
-        padding: 5px;
+        padding: 10px;
         background: #fff;
         border-radius: 15px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        span:first-child {
-          padding: 5px 10px;
-          display: block;
-          width: 850px;
-          word-break: break-all;
-        }
-        .del-comment {
-          cursor: pointer;
-          padding: 5px;
-        }
-        span:last-child {
-          display: block;
-          padding: 5px;
-          width: 140px;
-          font-size: 12px;
-          align-self: flex-start;
-          background: #ecf0f1;
-          border-radius: 15px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        .video__comment-info {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+          .video__comment-title {
+            .author {
+              font-size: 18px;
+              font-weight: bold;
+              margin-right: 5px;
+            }
+            .time {
+              opacity: .7;
+            }
+          }
+          .del-comment {
+            cursor: pointer;
+            padding: 5px;
+          }
         }
       }
     }
