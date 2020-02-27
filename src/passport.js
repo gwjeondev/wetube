@@ -16,13 +16,22 @@ dotenv.config();
 // Local
 passport.use(User.createStrategy());
 
+const getCallBackURL = () => {
+  if (process.env.NODE_ENV === "production") {
+    return "https://www.won-wetube.com";
+  }
+  return "http://localhost:4000";
+};
+
+const callBackURL = getCallBackURL();
+
 // Github
 passport.use(
   new GithubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`
+      callbackURL: `${callBackURL}${routes.githubCallback}`
     },
     githubLoginCallback
   )
@@ -33,7 +42,7 @@ passport.use(
   new KakaoStrategy(
     {
       clientID: process.env.KAKAO_ID,
-      callbackURL: `http://localhost:4000${routes.kakaoCallback}`
+      callbackURL: `${callBackURL}${routes.kakaoCallback}`
     },
     kakaoLoginCallback
   )
@@ -45,7 +54,7 @@ passport.use(
     {
       clientID: process.env.NAVER_ID,
       clientSecret: process.env.NAVER_CLIENT_SECRET,
-      callbackURL: `http://localhost:4000${routes.naverCallback}`
+      callbackURL: `${callBackURL}${routes.naverCallback}`
     },
     naverLoginCallback
   )
