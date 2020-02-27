@@ -18,7 +18,7 @@ passport.use(User.createStrategy());
 
 const getCallBackURL = () => {
   if (process.env.NODE_ENV === "production") {
-    return "https://www.won-wetube.com";
+    return "https://won-wetube.com";
   }
   return "http://localhost:4000";
 };
