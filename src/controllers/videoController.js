@@ -1,7 +1,5 @@
 import routes from "../routes";
-import Comment from "../models/Comment";
 import Video from "../models/Video";
-import User from "../models/User";
 
 // Home
 export const home = async (req, res) => {
@@ -48,6 +46,8 @@ export const postUpload = async (req, res) => {
 // Video Detail
 export const videoDetail = async (req, res) => {
   const { id } = req.params;
+  console.log(req.user);
+  let like;
   try {
     const videos = await Video.findById(id)
       .populate("creator")
@@ -57,7 +57,12 @@ export const videoDetail = async (req, res) => {
           path: "creator"
         }
       });
-    const like = req.user.likes.indexOf(videos.id);
+    if (req.user) {
+      like = req.user.likes.indexOf(videos.id);
+    } else {
+      like = -1;
+    }
+    console.log(like);
     res.render("videoDetail", { pageTitle: videos.title, videos, like });
   } catch (error) {
     res.render(routes.home);
