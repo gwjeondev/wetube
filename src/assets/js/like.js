@@ -27,7 +27,7 @@ const handleClick = async () => {
     }
   });
   if (response.data.status === true) {
-    response.data === -1 ? addLikeNumber() : delLikeNumber();
+    response.data.like === -1 ? addLikeNumber() : delLikeNumber();
   } else {
     likeLoginCheck.classList.add("show");
   }
