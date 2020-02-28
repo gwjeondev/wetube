@@ -46,7 +46,6 @@ export const postUpload = async (req, res) => {
 // Video Detail
 export const videoDetail = async (req, res) => {
   const { id } = req.params;
-  console.log(req.user);
   let like;
   try {
     const videos = await Video.findById(id)
@@ -57,15 +56,17 @@ export const videoDetail = async (req, res) => {
           path: "creator"
         }
       });
+    // 로그인 유저가 좋아요를 한지 안한지 체크
     if (req.user) {
       like = req.user.likes.indexOf(videos.id);
     } else {
       like = -1;
     }
-    console.log(like);
     res.render("videoDetail", { pageTitle: videos.title, videos, like });
   } catch (error) {
-    res.render(routes.home);
+    req.flash("error", "존재하지 않는 비디오입니다.");
+    res.status(404);
+    res.redirect(routes.home);
   }
 };
 

@@ -1,0 +1,14 @@
+.error404 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .error404__error-mark {
+        font-size: 150px;
+        margin-bottom: 20px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+}

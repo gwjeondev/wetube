@@ -38,7 +38,17 @@ export const localsMiddleware = (req, res, next) => {
 };
 
 // Router 권한 제어 미들웨어
-export const loginPrivate = (req, res, next) =>
-  req.user ? res.redirect(routes.home) : next();
-export const userPrivate = (req, res, next) =>
-  req.user ? next() : res.redirect(routes.home);
+export const loginPrivate = (req, res, next) => {
+  if (req.user) {
+    req.flash("error", "잘못된 접근입니다");
+    return res.redirect(routes.home);
+  }
+  return next();
+};
+export const userPrivate = (req, res, next) => {
+  if (req.user) {
+    return next();
+  }
+  req.flash("error", "잘못된 접근입니다");
+  res.redirect(routes.home);
+};

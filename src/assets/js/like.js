@@ -3,6 +3,7 @@ import axios from "axios";
 const likeBtn = document.getElementById("Like");
 const likeShape = document.getElementById("LikeShape");
 const likeNumber = document.getElementById("LikeNumber");
+const likeLoginCheck = document.getElementById("LikeLoginCheck");
 
 const addLikeNumber = () => {
   const num = parseInt(likeNumber.innerText, 10);
@@ -25,8 +26,10 @@ const handleClick = async () => {
       videoId
     }
   });
-  if (response.status === 200) {
+  if (response.data.status === true) {
     response.data === -1 ? addLikeNumber() : delLikeNumber();
+  } else {
+    likeLoginCheck.classList.add("show");
   }
 };
 

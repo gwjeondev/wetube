@@ -5,4 +5,11 @@
     i {
       color: #ff7675;
     }
+    #LikeLoginCheck {
+      display: none;
+      opacity: .4;
+      &.show {
+        display: inline;
+      }
+    }
 }

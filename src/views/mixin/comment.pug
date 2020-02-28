@@ -1,21 +1,24 @@
-mixin comment(video={})
+mixin comment(type={})
      .comment
         span.comment__number
             span  댓글 
-            span#commentNumber=videos.comments.length
+            span#commentNumber=type.comments.length
         .comment__add-form
             form#addComment
-                textarea#commentInput(type="text", name="comment", class=commentId, placeholder="댓글 입력")
+                if loggedUser
+                    textarea#commentInput(type="text", name="comment", placeholder="댓글 입력")
+                else
+                    textarea#commentInput(type="text", name="comment", placeholder="로그인이 필요합니다.", disabled)
                 button.comment__add-btn#commentAddBtn 등록
         ul.comment__area#commentList
-            each comment in videos.comments.reverse()
+            each comment in type.comments.reverse()
                 li.comment__list
-                    a(href=routes.userDetail(videos.creator.id))
+                    a(href=routes.userDetail(type.creator.id))
                         img.comment__avatar(src=comment.creator.avatarUrl, alt="avatar")
                     .comment__content
                         .comment__info
                             .comment__creator
-                                a(href=routes.userDetail(videos.creator.id))
+                                a(href=routes.userDetail(type.creator.id))
                                     span.comment__author=comment.creator.name
                                 span.comment__time=comment.createAt.toString().slice(0,21)
                             if loggedUser && comment.creator.id.toString() === loggedUser.id

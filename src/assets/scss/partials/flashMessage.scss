@@ -1,0 +1,36 @@
+@keyframes flashAni {
+    0% {
+        transform: translate(-1500px, -50%);
+    }
+    25% {
+        transform: translate(-50%, -50%);
+    }
+    75% {
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        transform: translate(1500px, -50%);
+    }
+}
+.flash-message {
+    width: auto;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 11;
+    transform: translate(-900px, -50%);
+    font-size: 18px;
+    color: white;
+    animation: flashAni 3s forwards;
+    border-radius: 10px;
+    &.error {
+        background: rgba(255, 118, 117,1);
+    }
+    &.info {
+        background: rgba(178, 190, 195,1.0);
+    }
+    &.success {
+        background: rgba(85, 239, 196,1.0);
+    }
+}

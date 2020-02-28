@@ -1,8 +1,11 @@
 import Video from "../models/Video";
 
-const postVideoLike = async (req, res) => {
+const postVideoLike = async (req, res, next) => {
   const { videoId } = req.body;
   try {
+    if (!req.user) {
+      throw Error();
+    }
     const like = req.user.likes.indexOf(videoId);
     const video = await Video.findById(videoId);
     if (like === -1) {
@@ -18,9 +21,15 @@ const postVideoLike = async (req, res) => {
       req.user.likes = req.user.likes.filter(i => i.toString() !== videoId);
       req.user.save();
     }
-    res.send(like.toString());
+    res.send({
+      like,
+      status: true
+    });
   } catch (error) {
-    res.status(400);
+    // next(error);
+    res.send({
+      status: false
+    });
   } finally {
     res.end();
   }

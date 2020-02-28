@@ -7,6 +7,7 @@ export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 export const postJoin = async (req, res, next) => {
   const { name, email, password, password2 } = req.body;
   if (password !== password2) {
+    req.flash("error", "패스워드가 일치하지 않습니다!");
     res.status(400); // 요청에 대한 상태코드
     res.render("join", { pageTitle: "Join" });
   } else {
@@ -31,7 +32,9 @@ export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Login" });
 export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
-  successRedirect: routes.home
+  successRedirect: routes.home,
+  successFlash: "로그인 성공!",
+  failureFlash: "아이디 또는 비밀번호를 확인하세요!"
 });
 
 // Social Login
@@ -107,7 +110,6 @@ export const naverLoginCallback = async (
   profile,
   done
 ) => {
-  console.log(profile);
   const { id, email, nickname } = profile._json;
   try {
     const user = await User.findOne({ email });
@@ -135,6 +137,7 @@ export const postNaverLogin = (req, res) => {
 // Logout
 export const logout = (req, res) => {
   req.logout(); // passport 사용시
+  req.flash("success", "로그아웃 완료!");
   res.redirect(routes.home);
 };
 
@@ -149,13 +152,14 @@ export const userDetail = async (req, res) => {
     const user = await User.findById(id).populate("videos");
     res.render("userDetail", { pageTitle: "User-Detail", user });
   } catch (error) {
+    res.status(404);
+    req.flash("error", "존재하지 않는 유저입니다.");
     res.redirect(routes.home);
   }
 };
 
 // Edit Profile
 export const getEditProfile = (req, res) => {
-  console.log(req.user);
   res.render("editProfile", { pageTitle: "Edit-Profile" });
 };
 export const postEditProfile = async (req, res) => {
@@ -182,14 +186,12 @@ export const postChangePassword = async (req, res) => {
   const { oldpassword, newpassword, newpassword1 } = req.body;
   try {
     if (newpassword !== newpassword1) {
-      res.status(400);
       res.redirect(`/users${routes.changePassword}`);
       return;
     }
     await req.user.changePassword(oldpassword, newpassword);
     res.redirect(routes.me);
   } catch (error) {
-    res.status(400);
     res.redirect(`/users${routes.changePassword}`);
   }
 };

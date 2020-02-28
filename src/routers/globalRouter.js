@@ -41,21 +41,33 @@ globalRouter.get(routes.logout, logout);
 globalRouter.get(routes.gitHub, githubLogin);
 globalRouter.get(
   routes.githubCallback,
-  passport.authenticate("github", { failureRedirect: "/login" }),
+  passport.authenticate("github", {
+    failureRedirect: "/login",
+    successFlash: "로그인 성공!",
+    failureFlash: "아이디 또는 비밀번호를 확인하세요!"
+  }),
   postGithubLogin
 );
 
 globalRouter.get(routes.kakao, kakaoLogin);
 globalRouter.get(
   routes.kakaoCallback,
-  passport.authenticate("kakao", { failureRedirect: "/login" }),
+  passport.authenticate("kakao", {
+    failureRedirect: "/login",
+    successFlash: "로그인 성공!",
+    failureFlash: "아이디 또는 비밀번호를 확인하세요!"
+  }),
   postKakaoLogin
 );
 
 globalRouter.get(routes.naver, naverLogin);
 globalRouter.get(
   routes.naverCallback,
-  passport.authenticate("naver", { failureRedirect: "/login" }),
+  passport.authenticate("naver", {
+    failureRedirect: "/login",
+    successFlash: "로그인 성공!",
+    failureFlash: "아이디 또는 비밀번호를 확인하세요!"
+  }),
   postNaverLogin
 );
 
