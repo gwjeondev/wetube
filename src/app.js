@@ -52,9 +52,9 @@ app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
 app.use(routes.api, apiRouter);
 
-app.use((req, res, next) => {
-  res.status(404);
-  res.render("error404");
-});
+// app.use((req, res, next) => {
+//   res.status(404);
+//   res.render("error404");
+// });
 
 export default app;
