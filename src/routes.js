@@ -32,6 +32,8 @@ const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
 const DEL_COMMENT = "/:id/comment-delete";
+const LIKE = "/:id/like";
+
 const routes = {
   home: HOME,
   join: JOIN,
@@ -57,7 +59,8 @@ const routes = {
   api: API,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
-  delComment: DEL_COMMENT
+  delComment: DEL_COMMENT,
+  like: LIKE
 };
 
 export default routes;

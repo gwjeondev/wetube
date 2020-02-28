@@ -14,7 +14,9 @@ export const postJoin = async (req, res, next) => {
     try {
       const user = await User({
         name,
-        email
+        email,
+        avatarUrl:
+          "https://raw.githubusercontent.com/won-developer/img/master/not_profile.png"
       });
       await User.register(user, password);
       next();
@@ -40,7 +42,7 @@ export const githubLoginCallback = async (
   profile,
   cb
 ) => {
-  const { id, avatar_url, name, email } = profile._json;
+  const { id, name, email } = profile._json;
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -52,7 +54,8 @@ export const githubLoginCallback = async (
       email,
       name,
       githubId: id,
-      avatarUrl: avatar_url
+      avatarUrl:
+        "https://raw.githubusercontent.com/won-developer/img/master/not_profile.png"
     });
     return cb(null, newUser);
   } catch (error) {
@@ -71,7 +74,7 @@ export const kakaoLoginCallback = async (
   done
 ) => {
   const { id } = profile._json;
-  const { nickname, profile_image } = profile._json.properties;
+  const { nickname } = profile._json.properties;
   const { email } = profile._json.kakao_account;
 
   try {
@@ -84,7 +87,8 @@ export const kakaoLoginCallback = async (
     const newUser = await User.create({
       email,
       name: nickname,
-      avatarUrl: profile_image,
+      avatarUrl:
+        "https://raw.githubusercontent.com/won-developer/img/master/not_profile.png",
       kakaoId: id
     });
     return done(null, newUser);
@@ -103,7 +107,8 @@ export const naverLoginCallback = async (
   profile,
   done
 ) => {
-  const { id, email, profile_image, nickname } = profile._json;
+  console.log(profile);
+  const { id, email, nickname } = profile._json;
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -114,7 +119,8 @@ export const naverLoginCallback = async (
     const newUser = await User.create({
       email,
       name: nickname,
-      avatarUrl: profile_image,
+      avatarUrl:
+        "https://raw.githubusercontent.com/won-developer/img/master/not_profile.png",
       naverId: id
     });
     return done(null, newUser);
@@ -148,8 +154,10 @@ export const userDetail = async (req, res) => {
 };
 
 // Edit Profile
-export const getEditProfile = (req, res) =>
+export const getEditProfile = (req, res) => {
+  console.log(req.user);
   res.render("editProfile", { pageTitle: "Edit-Profile" });
+};
 export const postEditProfile = async (req, res) => {
   const { file } = req;
   const { id } = req.user;

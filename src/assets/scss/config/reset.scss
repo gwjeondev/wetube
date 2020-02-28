@@ -142,8 +142,10 @@ table {
   border-spacing: 0;
 }
 
-input {
+input,
+textarea {
     border: none;
+    font-family: 'Noto Sans KR', serif;
   &:focus,
   &:active {
     outline: none;

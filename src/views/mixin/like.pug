@@ -1,0 +1,9 @@
+mixin like(like={})
+    .like#Like
+            span#LikeShape
+                if like === -1
+                    i.far.fa-heart 
+                else
+                    i.fas.fa-heart
+            span  좋아요 
+            span#LikeNumber=videos.likes

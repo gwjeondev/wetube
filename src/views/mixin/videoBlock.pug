@@ -3,8 +3,5 @@ mixin videoBlock(video = {})
         a(href=routes.videoDetail(video.id))
             video.video-block__thumbnail(src=video.file)
             h4.video-block__title=video.title
-            if video.views === 1
-                h5.video-block__views 1 view
-            else
-                h5.video-block__views #{video.views} views
+            h5.video-block__views 조회수 #{video.views}
             
