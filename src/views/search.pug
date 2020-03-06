@@ -3,10 +3,13 @@ include mixin/videoBlock
 
 block content
     .search__header
-        p Searching for: #{searchingBy}
+        span
+            i.fas.fa-search
+        span
+            | Searching for: #{searchingBy}
     .home-videos
         if videos.length === 0 
-            h4 No Videos!
+            h4 검색한 비디오가 없습니다.
         each item in videos
             +videoBlock({
                 id: item.id,

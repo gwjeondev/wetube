@@ -12,7 +12,7 @@ const postVideoLike = async (req, res, next) => {
       // 좋아요가 없을때
       video.likes += 1;
       video.save();
-      req.user.likes = videoId;
+      req.user.likes.push(videoId);
       req.user.save();
     } else {
       // 좋아요가 있을때
@@ -21,15 +21,9 @@ const postVideoLike = async (req, res, next) => {
       req.user.likes = req.user.likes.filter(i => i.toString() !== videoId);
       req.user.save();
     }
-    res.send({
-      like,
-      status: true
-    });
+    res.send(JSON.stringify(like));
   } catch (error) {
-    // next(error);
-    res.send({
-      status: false
-    });
+    res.status(400);
   } finally {
     res.end();
   }

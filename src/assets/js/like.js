@@ -17,20 +17,23 @@ const delLikeNumber = () => {
   likeShape.innerHTML = '<i class="far fa-heart"></i>';
 };
 
-const handleClick = async () => {
+const handleClick = () => {
   const videoId = window.location.href.split("/videos/")[1];
-  const response = await axios({
+  axios({
     url: `/api/${videoId}/like`,
     method: "POST",
     data: {
       videoId
     }
-  });
-  if (response.data.status === true) {
-    response.data.like === -1 ? addLikeNumber() : delLikeNumber();
-  } else {
-    likeLoginCheck.classList.add("show");
-  }
+  })
+    .then(res => {
+      if (res.status === 200) {
+        res.data === -1 ? addLikeNumber() : delLikeNumber();
+      }
+    })
+    .catch(err => {
+      likeLoginCheck.classList.add("show");
+    });
 };
 
 const init = () => {

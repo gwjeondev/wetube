@@ -13,12 +13,12 @@ mixin comment(type={})
         ul.comment__area#commentList
             each comment in type.comments.reverse()
                 li.comment__list
-                    a(href=routes.userDetail(type.creator.id))
+                    a(href=routes.userDetail(comment.creator.id))
                         img.comment__avatar(src=comment.creator.avatarUrl, alt="avatar")
                     .comment__content
                         .comment__info
                             .comment__creator
-                                a(href=routes.userDetail(type.creator.id))
+                                a(href=routes.userDetail(comment.creator.id))
                                     span.comment__author=comment.creator.name
                                 span.comment__time=comment.createAt.toString().slice(0,21)
                             if loggedUser && comment.creator.id.toString() === loggedUser.id
